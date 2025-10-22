@@ -1,1 +1,18 @@
-
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        while(head!=NULL && head->val==val){
+            head=head->next;//jab head pr hi value hogi 
+        }
+        ListNode* temp=head;//create temp if val!=head;
+        while(temp!=NULL && temp->next!=NULL){
+            if(temp->next->val==val){
+                temp->next=temp->next->next;  
+                }
+                else{
+                    temp=temp->next;
+                }
+        }
+        return head;
+    }
+};
