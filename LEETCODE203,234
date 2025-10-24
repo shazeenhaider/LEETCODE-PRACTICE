@@ -16,3 +16,26 @@ public:
         return head;
     }
 };
+**********linked list is palindrome or not****************
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<int> s;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            s.push(temp->val);
+            temp=temp->next;
+        }
+        temp=head;
+        while(!s.empty()){
+        if(s.top() != temp->val){
+            return false;
+        }
+        else{
+            s.pop();
+            temp=temp->next;
+        }
+        }
+        return true;
+    }
+};
