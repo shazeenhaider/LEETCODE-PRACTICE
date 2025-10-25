@@ -39,3 +39,13 @@ public:
         return true;
     }
 };
+**************Delete Node without head Pointer***********
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        node->val=node->next->val;//copying the next node to current node
+        ListNode* temp=node->next;
+        node->next=node->next->next;//connecting node after jumping one from curr node
+        delete temp;//deleting the duplicate 
+    }
+};
