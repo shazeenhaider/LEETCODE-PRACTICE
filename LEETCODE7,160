@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int reverse(int x) {
+      int reversed=0;
+      while(x!=0){
+        int digit=x%10;
+        if(reversed>INT_MAX/10 || reversed<INT_MIN/10){//checking the range of interger for overflow and underflow of integer range
+            return 0;
+        }
+        reversed= reversed*10+ digit;
+        x /=10;
+      }  
+      return reversed;
+    }
+};
+*************intersection two linked list***************
+//will do it with finding the length approach and hashing approach
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* temp1=headA;
+        ListNode* temp2=headB;
+        while(temp1!=temp2){
+            temp1=temp1->next;
+            temp2=temp2->next;
+            if(temp1==temp2){//if find intersection or both reaches NULL
+                return temp1;
+            }
+            if(temp1==NULL){
+                temp1=headB;
+            }
+            if(temp2==NULL){
+                temp2=headA;
+        }
+        }
+        return temp1;//both pointing to same head
+    }
+};
