@@ -21,5 +21,23 @@ class Solution {
         return -1;
     }
 };
+*********remove duplicate from sorted linked list*****
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==NULL){
+            return NULL;
+        }
+        ListNode* temp=head;
+        while(temp!=NULL && temp->next!=NULL){
+            if(temp->val == temp->next->val){
+                temp->next=temp->next->next;
+            }
+            else
+            temp=temp->next;
+        }
+        return head;
+    }
+};
 
   
