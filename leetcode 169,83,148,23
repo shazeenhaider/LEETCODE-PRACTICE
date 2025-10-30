@@ -90,5 +90,52 @@ public:
         return merge(left, right);
     }
 };
+**************Merge K sorted lists ****************
+class Solution {
+public:
+    ListNode* merge(ListNode* left, ListNode* right) {
+        if (left == NULL) return right;
+        if (right == NULL) return left;
+
+        ListNode* ans = new ListNode(-1);  
+        ListNode* temp = ans;
+
+        while (left != NULL && right != NULL) {
+            if (left->val < right->val) {
+                temp->next = left;
+                left = left->next;
+            } else {
+                temp->next = right;
+                right = right->next;
+            }
+            temp = temp->next;  
+        }
+
+        // Attach the remaining nodes
+        if (left != NULL) temp->next = left;
+        if (right != NULL) temp->next = right;
+
+        return ans->next;  
+    }
+    ListNode* partitionAndmerge(int start, int end,vector<ListNode*>&lists){
+        if(start>end){
+            return NULL;
+        }
+        if(start==end){
+            return lists[start];
+        }
+        int mid= start+(end-start)/2;
+        ListNode* L1= partitionAndmerge(start,mid,lists);
+        ListNode* L2=partitionAndmerge(mid+1,end,lists);
+        return merge(L1,L2);
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        int k=lists.size();
+        if(k==0){
+            return NULL;
+        }
+        return partitionAndmerge(0,k-1,lists);
+    }
+};
 
   
