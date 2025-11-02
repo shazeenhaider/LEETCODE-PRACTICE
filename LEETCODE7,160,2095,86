@@ -59,3 +59,29 @@ public:
         return head;
     }
 };
+*************Partition List*******************
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        
+        ListNode* temp1=head;
+        ListNode* dummy1= new ListNode(0);
+        ListNode* small=dummy1;
+        ListNode* dummy2= new ListNode(0);
+        ListNode* large= dummy2;
+        while(temp1!=NULL){
+            if(temp1->val<x){
+            small->next=temp1;
+            small=small->next;
+        }
+        else{
+            large->next=temp1;
+            large=large->next;
+        }
+        temp1=temp1->next;
+        }
+        small->next=dummy2->next;
+         large->next=NULL;
+         return dummy1->next;
+    }
+};
