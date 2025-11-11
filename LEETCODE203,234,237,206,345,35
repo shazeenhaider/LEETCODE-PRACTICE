@@ -96,3 +96,26 @@ public:
         return s;
     }
 };
+***************Binary Search*************
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int st=0;
+        int end=nums.size()-1;
+        while(st<=end){
+          int mid=st+(end-st)/2;//take care of overflow
+          if(nums[mid]==target){
+            return mid;
+          }
+          else if(nums[mid]>target){
+            //move to left side;
+            end=mid-1;
+          }
+          else {
+            //move to right side
+            st=mid+1;
+          }
+        }
+        return st;//index at which element can be inserted if present
+    }
+};
