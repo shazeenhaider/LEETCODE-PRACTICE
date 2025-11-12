@@ -105,3 +105,22 @@ public:
         return  index;
     }
 };
+*************Length Of Last Characters***************
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int n=s.length()-1;
+        int count=0;
+        while(n>=0 && s[n]==' '){//removing last spaces 
+            n--;
+        }
+        for(int i=n; i>=0; i--){//reverse loop to iterate last 
+          if(s[i]!=' '){
+            count++;
+           }
+           else
+             break;
+        }
+        return count;
+    }
+};
