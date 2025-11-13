@@ -124,3 +124,56 @@ public:
         return count;
     }
 };
+*****************Swap Nodes in Pairs**************
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {//RECURSIVE APPROACH
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+        ListNode* temp=head->next;
+        head->next=swapPairs(head->next->next);
+        temp->next=head;
+        return temp;
+    }
+};
+************Iterative Approach***********
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if (head == NULL || head->next == NULL) {
+            return head;
+        }
+
+        // new head will be the 2nd node after first swap
+        ListNode* newHead = head->next;
+
+        ListNode* temp1 = head;          // first node of the pair
+        ListNode* temp2 = head->next;    // second node of the pair
+        ListNode* prevTail = NULL;       // tail of previous swapped pair
+
+        while (temp1 != NULL && temp2 != NULL) {
+            ListNode* nextPair = temp2->next; // store next pair start
+
+            // swap the pair
+            temp2->next = temp1;
+            temp1->next = nextPair;
+
+            // connect previous swapped pair with current swapped pair
+            if (prevTail != NULL) {
+                prevTail->next = temp2;
+            }
+
+            // move pointers ahead
+            prevTail = temp1;
+            temp1 = nextPair;
+            if (temp1 != NULL) {
+                temp2 = temp1->next;
+            } else {
+                temp2 = NULL;
+            }
+        }
+
+        return newHead;
+    }
+};
