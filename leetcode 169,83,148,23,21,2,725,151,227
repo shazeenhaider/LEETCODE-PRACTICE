@@ -252,3 +252,51 @@ public:
         return ans.substr(1);
     }
 };
+***********Basic Calculator******************
+class Solution {
+public:
+    int calculate(string s) {
+    stack<int> st;
+    char sign = '+';//initially 
+    int n = s.length();
+        
+    for(int i = 0; i < n; i++) {
+        char ch = s[i];
+
+        if(isdigit(ch)) {
+            long long val = 0;
+
+            while(i < n && isdigit(s[i])) {
+                val = val * 10 + (s[i] - '0');
+                i++;
+            }
+            i--;
+
+            if(sign == '+') 
+            st.push(val);
+            else if(sign == '-') 
+            st.push(-val);
+            else if(sign == '*') {
+                int a = st.top(); 
+                st.pop();
+                st.push(a * val);
+            }
+            else if(sign == '/') {
+                int a = st.top(); 
+                st.pop();
+                st.push(a / val);
+            }
+        }
+        else if(ch != ' ') {//updating the sign
+            sign = ch;
+        }
+    }
+
+    int sum = 0;
+    while(!st.empty()) {
+        sum += st.top();
+        st.pop();
+    }
+    return sum;
+}
+};
