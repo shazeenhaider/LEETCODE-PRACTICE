@@ -63,4 +63,33 @@ public:
         return ans;
     }
 };
+***********Spiral Matrix II **************
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        int siz= n;//size of each vector
+        vector<vector<int>> matrix(n , vector<int>(n));
+        
+        int srow=0, scol=0;
+        int erow=n-1, ecol=n-1;
+        int num=1;
+        while(srow<=erow && scol<=ecol){
+        for(int i=scol; i<=ecol; i++){
+            matrix[srow][i]=num++;
+        }
+        for(int i=srow+1; i<=erow; i++){
+            matrix[i][ecol]=num++;
+        }
+        for(int i=ecol-1; i>=scol; i--){
+            matrix[erow][i]=num++;
+        }
+        for(int i=erow-1; i>=srow+1; i--){
+            matrix[i][scol]=num++;
+        }
+        srow++, scol++;
+        erow--, ecol--;
+        }
+        return matrix;
+    }
+};
 
