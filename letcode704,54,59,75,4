@@ -114,4 +114,34 @@ public:
         }
     }
 };
+**********Median of the two sorted array*************
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int st1 = 0, st2 = 0;
+        vector<int> ans;
+
+        // merge two sorted arrays
+        while(st1 < nums1.size() && st2 < nums2.size()){
+            if(nums1[st1] < nums2[st2])
+                ans.push_back(nums1[st1++]);
+            else
+                ans.push_back(nums2[st2++]);
+        }
+
+        while(st1 < nums1.size())
+            ans.push_back(nums1[st1++]);
+
+        while(st2 < nums2.size())
+            ans.push_back(nums2[st2++]);
+
+        int n = ans.size();
+        
+        // find median
+        if(n % 2 == 1)
+            return ans[n/2];
+        else
+            return (ans[n/2 - 1] + ans[n/2]) / 2.0;
+    }
+};
 
