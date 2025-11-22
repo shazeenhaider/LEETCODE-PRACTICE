@@ -144,7 +144,30 @@ public:
             return (ans[n/2 - 1] + ans[n/2]) / 2.0;
     }
 };
-****************Search in 2D Matrix**********
+****************Search in 2D Matrix I ********** Must be in T.C O(log(n*m))
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        //staircase approach;
+        //T.C O(n+m);
+        int m = matrix.size();//no. of row 
+        int n = matrix[0].size();//no. of column
+        int i=0, j=n-1;//i-->row j-->column
+        while(i<m && j>=0){
+            if(matrix[i][j]==target){
+                return true;
+            }
+            else if(matrix[i][j]>target){
+                j--;//move to left
+            }
+            else{
+                i++;//down
+            }
+        }
+        return false;
+    }
+};
+************search in 2d matrix II *********
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
