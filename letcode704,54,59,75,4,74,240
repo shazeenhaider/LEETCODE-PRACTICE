@@ -148,25 +148,28 @@ public:
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        //staircase approach;
-        //T.C O(n+m);
+        //binary search  approach;
+        //T.C O(log(n*m));
         int m = matrix.size();//no. of row 
         int n = matrix[0].size();//no. of column
-        int i=0, j=n-1;//i-->row j-->column
-        while(i<m && j>=0){
-            if(matrix[i][j]==target){
+        int start=0, end=m*n-1;
+        while(start<=end){
+            int mid= start+(end-start)/2;
+            if(matrix[mid/n][mid%n]==target){
                 return true;
             }
-            else if(matrix[i][j]>target){
-                j--;//move to left
+            else if(matrix[mid/n][mid%n]>target){
+                end= mid-1;
             }
             else{
-                i++;//down
+                start= mid +1;//down
             }
         }
         return false;
     }
 };
+          
+ 
 ************search in 2d matrix II *********
 class Solution {
 public:
