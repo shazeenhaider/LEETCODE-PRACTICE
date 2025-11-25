@@ -193,4 +193,20 @@ public:
         return false;
     }
 };
-
+***********Rotate array*********
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int m = nums.size();
+        k = k%m;//handle large k if k larger the than size of array
+        reverse(nums.begin(),nums.end());//full reverse
+        int end=m-1;
+        int  st=k;//move start to k
+        reverse(nums.begin(),nums.begin() + k);//reverse first k element
+       while(st<end){//reversing the remaining element
+        swap(nums[st],nums[end]);
+        st++;
+        end--;
+       }
+    }
+};
