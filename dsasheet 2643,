@@ -1,0 +1,29 @@
+********Row with maximum no. of zeroes********
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
+
+        int prevCount = 0;   // maximum count seen so far
+        int currCount = 0;   // count for current row
+        int index = 0;       // row index with maximum ones
+
+        for(int i = 0; i < m; i++){
+            currCount = 0;   // reset for this row
+
+            for(int j = 0; j < n; j++){
+                if(mat[i][j] == 1)
+                    currCount++;
+            }
+
+            // if this row has more ones, update
+            if(currCount > prevCount){
+                prevCount = currCount;
+                index = i;
+            }
+        }
+
+        return {index, prevCount};
+    }
+};
