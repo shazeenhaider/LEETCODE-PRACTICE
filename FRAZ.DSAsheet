@@ -1,0 +1,65 @@
+********Row with maximum no. of zeroes******** 2643
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
+
+        int prevCount = 0;   // maximum count seen so far
+        int currCount = 0;   // count for current row
+        int index = 0;       // row index with maximum ones
+
+        for(int i = 0; i < m; i++){
+            currCount = 0;   // reset for this row
+
+            for(int j = 0; j < n; j++){
+                if(mat[i][j] == 1)
+                    currCount++;
+            }
+
+            // if this row has more ones, update
+            if(currCount > prevCount){
+                prevCount = currCount;
+                index = i;
+            }
+        }
+
+        return {index, prevCount};
+    }
+};
+************** Lucky Number in matrix**********  1380
+class Solution {
+public:
+    vector<int> luckyNumbers (vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        vector<int> ans;
+
+        for(int i = 0; i < m; i++){
+            // Step 1: find min element in row i
+            int minVal = INT_MAX;
+            int colIdx = -1;
+
+            for(int j = 0; j < n; j++){
+                if(matrix[i][j] < minVal){
+                    minVal = matrix[i][j];
+                    colIdx = j;
+                }
+            }
+
+            // Step 2: check if it's max in that column
+            bool isMax = true;
+            for(int k = 0; k < m; k++){
+                if(matrix[k][colIdx] > minVal){
+                    isMax = false;
+                    break;
+                }
+            }
+
+            if(isMax) ans.push_back(minVal);
+        }
+
+        return ans;
+    }
+};
+
