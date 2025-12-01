@@ -1,0 +1,22 @@
+*************largest repeating character replacement *********** 424
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        vector<int> freq(26,0);
+        int maxlen =0;
+        int left=0;
+        int maxfreq=0;
+        for(int right=0; right<s.length(); right++){
+            freq[s[right]-'A']++;//incresing the frequency of the character
+            // update maxfreq in current window
+            maxfreq = max(maxfreq , freq[s[right]-'A']);
+            int windowSize = right-left+1;
+            if(windowSize-maxfreq>k){
+                freq[s[left]-'A']--;//reduce the frequency
+                left++;//shrink window
+            }
+            maxlen = max(maxlen, right - left + 1);
+        }
+        return maxlen;
+    }
+};
