@@ -150,4 +150,35 @@ public:
         return s;
     }
 };
+*************String compression*************
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        //string conpression tool/data compression tool
+        //modify the input array in place
+        int n = chars.size();
+        int idx=0;//tracking index
+        for(int i=0; i<n; i++){
+            char ch =chars[i];//ectract the character
+            int count=0;
+            while(i<n && chars[i]==ch){
+                count++;
+                i++;
+            }
+            if(count==1){
+                chars[idx++]=ch;
+            }
+            else{
+                chars[idx++]=ch;
+                string str = to_string(count);
+                for(char dig:str){
+                   chars[idx++] = dig;
+                }
+            }
+            i--;
+        }
+        chars.resize(idx);
+            return idx;//new length
+        }
+};
 
