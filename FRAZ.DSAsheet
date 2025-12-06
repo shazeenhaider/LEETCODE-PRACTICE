@@ -106,5 +106,44 @@ public:
         return maxavg;
     }
 };
+**********Sliding subarray beauty********2653
+class Solution {     //approach--->I
+public:
+    vector<int> getSubarrayBeauty(vector<int>& nums, int k, int x) {
+
+        vector<int> ans;
+        int n = nums.size();
+
+        for(int i = 0; i <= n - k; i++) {
+
+            // collect elements of current window
+            vector<int> window;
+            for(int j = i; j < i + k; j++) {
+                window.push_back(nums[j]);
+            }
+
+            // sort the window
+            sort(window.begin(), window.end());
+
+            // we need x-th smallest NEGATIVE number
+            int negCount = 0;
+            int beauty = 0;  // default
+
+            for(int val : window) {
+                if(val < 0) {
+                    negCount++;
+                    if(negCount == x) {
+                        beauty = val;
+                        break;
+                    }
+                }
+            }
+
+            ans.push_back(beauty);
+        }
+
+        return ans;
+    }
+};
 
 
