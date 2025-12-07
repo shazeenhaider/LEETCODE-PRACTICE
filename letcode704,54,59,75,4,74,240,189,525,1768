@@ -232,3 +232,31 @@ public:
      return result;
     }
 };
+*********Merge two string alternately***********
+class Solution {
+public:
+    string mergeAlternately(string word1, string word2) {
+        string ans;//empty string
+        int m = word1.length();
+        int n = word2.length();
+        int s1=0 , s2=0;
+        while(s1<m && s2<n){
+            //merge alternatively
+            ans.push_back(word1[s1]);
+            ans.push_back(word2[s2]);
+            s1++;
+            s2++;
+        }
+        while(s1<m){
+            //add to last of ans 
+             ans.push_back(word1[s1]);
+             s1++;
+        }
+        while(s2<n){
+            //add to last of ans
+            ans.push_back(word2[s2]);
+            s2++;
+        }
+        return ans;
+    }
+};
