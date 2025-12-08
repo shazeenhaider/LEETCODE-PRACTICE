@@ -1,0 +1,35 @@
+*********Combination Sum*********
+class Solution {
+public:
+    set<vector<int>> s; // to store unique combinations
+
+    void getAllcombination(vector<int>& arr, int idx, int tar,
+                           vector<vector<int>>& ans, vector<int>& combin) {
+        if (idx == arr.size() || tar < 0)
+            return;
+
+        if (tar == 0) {
+            if (s.find(combin) == s.end()) {
+                ans.push_back(combin);
+                s.insert(combin);
+            }
+            return;
+        }
+
+        // include current element (once or multiple times)
+        combin.push_back(arr[idx]);
+        getAllcombination(arr, idx, tar - arr[idx], ans, combin);   // multiple allowed
+        combin.pop_back();
+
+        // exclude current element
+        getAllcombination(arr, idx + 1, tar, ans, combin);
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& arr, int tar) {
+        vector<vector<int>> ans;
+        vector<int> combin;
+        sort(arr.begin(), arr.end()); // helps avoid unnecessary duplicates
+        getAllcombination(arr, 0, tar, ans, combin);
+        return ans;
+    }
+};
