@@ -1,4 +1,4 @@
-********* N-repeated element in size 2N array****************
+********* N-repeated element in size 2N array**************** //961
 class Solution {
 public:
     int repeatedNTimes(vector<int>& nums) {
@@ -12,7 +12,7 @@ public:
         }
         return 0;*/
         for(int i=2; i<nums.size(); i++){//T.c=O(n) and S.c=O(1)
-            if(nums[i]==nums[i-1]||nums[i-2]){//pigeonhole approach
+            if(nums[i]==nums[i-1] || nums[i]==nums[i-2]){//pigeonhole approach
                 return nums[i];
             }
         }
