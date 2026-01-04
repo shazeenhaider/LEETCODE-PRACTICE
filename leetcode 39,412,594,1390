@@ -76,3 +76,55 @@ public:
         return result;
     }
 };
+**********four Divisor**************1390
+class Solution {//BRUTE FORCE O(n^2)
+public:
+    int sumFourDivisors(vector<int>& nums) {
+        int maxsum=0;
+        for(int i=0; i<nums.size(); i++){
+            int sum=0;
+            int count=0;
+            for(int j=1; j<=nums[i]; j++){
+              if(nums[i]%j==0){
+                sum = sum + j;//sum of divisor
+                count++;
+              }
+            }
+            if(count==4){
+                maxsum=maxsum+sum;
+            }
+        }
+        return maxsum;
+    }
+};
+class Solution { //---->T.c O(n + sqrt(n))<------
+public:
+    int findSumdivisor(int num){
+        int divisor=0;//count
+        int sum=0;//sum of divisor
+        for(int fact=1; fact*fact<=num; fact++){//perfect sqr case
+            if(num%fact==0){
+                int other=num/fact;
+                if(other==fact){
+                    divisor +=1;
+                    sum +=fact;
+                }
+                else{
+                    divisor +=2;
+                    sum += (fact + other);
+                }
+            }
+            if(divisor>4)//Invalid case
+                return 0;
+        }
+            return  divisor==4 ? sum : 0;
+    }
+    int sumFourDivisors(vector<int>& nums) {
+        int result=0;
+        for(int &num : nums){
+            result += findSumdivisor(num);
+        }
+
+            return result;  
+    }
+};
