@@ -42,5 +42,64 @@ int atMostK(vector<int>& nums, int K) {
         return atMostK(nums, k) - atMostK(nums, k - 1);
     }
 };
+********Maximum point you can obatin from cards**********
+class Solution {   T.C O(k)------>sliding window
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        int n = cardPoints.size();
+        int currSum = 0;
+
+        // Take first k cards from left
+        for (int i = 0; i < k; i++)
+            currSum += cardPoints[i];
+
+        int maxSum = currSum;
+        int right = n - 1;
+
+        // Replace left cards with right cards
+        for (int i = k - 1; i >= 0; i--) {
+            currSum -= cardPoints[i];
+            currSum += cardPoints[right];
+            right--;
+            maxSum = max(maxSum, currSum);
+        }
+
+        return maxSum;
+    }
+};
+approach II --------> totalsum - minsumArray
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        int n = cardPoints.size();
+        int totalSum = 0;
+
+        for(int x : cardPoints)
+            totalSum += x;
+
+        if(k == n)
+            return totalSum;
+
+        int windowSize = n - k;
+        int windowSum = 0;
+
+        for(int i = 0; i < windowSize; i++)
+            windowSum += cardPoints[i];
+
+        int minWindowSum = windowSum;
+
+        for(int i = windowSize; i < n; i++) {
+            windowSum += cardPoints[i];
+            int outerindex=i - windowSize;
+            windowSum -= cardPoints[outerindex];
+            minWindowSum = min(minWindowSum, windowSum);
+        }
+
+        return totalSum - minWindowSum;
+    }
+};
+
+
+
 
    
