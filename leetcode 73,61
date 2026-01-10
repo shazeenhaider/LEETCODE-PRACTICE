@@ -92,3 +92,48 @@ public:
         return maxLen;
     }
 };
+*********Rotate list**********61
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+
+        // ---------- Step 1: Handle edge cases ----------
+        if (head == NULL || head->next == NULL || k == 0)
+            return head;
+
+        // ---------- Step 2: Find length and last node ----------
+        ListNode* tail = head;
+        int len = 1;                // start from 1 because head is already counted
+
+        while (tail->next != NULL) {
+            tail = tail->next;
+            len++;
+        }
+
+        // ---------- Step 3: Normalize k ----------
+        k = k % len;
+        if (k == 0)
+            return head;
+
+        // ---------- Step 4: Make the list circular ----------
+        tail->next = head;
+
+        // ---------- Step 5: Find new tail ----------
+        // new tail is (len - k - 1)th node
+        int stepsToNewTail = len - k;
+        ListNode* newTail = head;
+
+        for (int i = 1; i < stepsToNewTail; i++) {
+            newTail = newTail->next;
+        }
+
+        // ---------- Step 6: Set new head ----------
+        ListNode* newHead = newTail->next;
+
+        // ---------- Step 7: Break the circular link ----------
+        newTail->next = NULL;
+
+        return newHead;
+    }
+};
+
