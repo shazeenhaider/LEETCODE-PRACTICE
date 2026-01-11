@@ -128,3 +128,19 @@ public:
             return result;  
     }
 };
+*******First letter to approach*************
+class Solution {
+public:
+    char repeatedCharacter(string s) {
+        int n =s.length();
+        unordered_map<char,int> freq;
+        for(int i=0; i<n; i++){
+            if(freq.count(s[i])){
+                return s[i];
+            }
+            freq[s[i]]++;
+        }
+        return ' ';
+    }
+    
+};
