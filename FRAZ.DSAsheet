@@ -145,5 +145,34 @@ public:
         return ans;
     }
 };
+*********Rotate string***********//796 T.C O(n^2)
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        int m =s.length();
+        int n= goal.length();
+        for(int i=0; i<=m; i++){
+            rotate(begin(s), begin(s)+1, end(s));
+            if(s==goal){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+--------->Approach II T.C=O(n), S.C=O(n)
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        int m =s.length();
+        int n= goal.length();
+        if(m!=n){
+            return false;
+        }
+        //concatenate s+s contain all rotation
+         string doubled=s+s;//concatenation of string
+        return doubled.find(goal)!=string::npos;
+    }
+};
 
 
