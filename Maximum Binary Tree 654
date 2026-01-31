@@ -1,0 +1,30 @@
+class Solution {
+public:
+    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+        stack<TreeNode*> st;
+
+        for (int x : nums) {
+            TreeNode* cur = new TreeNode(x);
+
+            // Smaller elements become left child
+            while (!st.empty() && st.top()->val < x) {
+                cur->left = st.top();
+                st.pop();
+            }
+
+            // Current becomes right child of stack top
+            if (!st.empty()) {
+                st.top()->right = cur;
+            }
+
+            st.push(cur);
+        }
+
+        // Bottom of stack is root
+        while (st.size() > 1) {
+            st.pop();
+        }
+
+        return st.top();
+    }
+};
