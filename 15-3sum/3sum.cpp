@@ -1,45 +1,30 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> ans;
-
+        //On^3 three loop brute force
+        //shuru k 1 element fix kr dia 
         sort(nums.begin(), nums.end());
-
-        for (int i = 0; i < nums.size(); i++) {
-
-            // Duplicate first element skip
-            if (i > 0 && nums[i] == nums[i - 1])
-                continue;
-
-            int left = i + 1;
-            int right = nums.size() - 1;
-
-            while (left < right) {
-
-                int sum = nums[i] + nums[left] + nums[right];
-
-                if (sum == 0) {
-                    ans.push_back({nums[i], nums[left], nums[right]});
-
-                    // Duplicate left/right skip
-                    while (left < right && nums[left] == nums[left + 1])
-                        left++;
-
-                    while (left < right && nums[right] == nums[right - 1])
-                        right--;
-
-                    left++;
-                    right--;
+        set<vector<int>>s1;//pair duplicate dekhega
+        for(int i=0; i<nums.size();i++){
+            int left=i+1;
+            int right=nums.size()-1;
+            while(left<right){
+                int sum=nums[i]+nums[left]+nums[right];
+                if(sum==0){
+                    //push to the set
+                    s1.insert({nums[i], nums[left], nums[right]});
+                   left++;
+                   right--;
                 }
-                else if (sum < 0) {
+                else if(sum<0){
                     left++;
                 }
-                else {
+                else{
                     right--;
                 }
+
             }
         }
-
-        return ans;
+        return vector<vector<int>>(s1.begin(),s1.end());
     }
 };
